@@ -11,7 +11,6 @@ return {
       "mfussenegger/nvim-dap-python",
     },
     ft = "python",
-    branch = "regexp",
     config = function()
       require("venv-selector").setup({
         -- Auto select venv when opening Python files
