@@ -25,8 +25,9 @@ return {
   -- Mason-lspconfig (bridge between Mason and lspconfig)
   {
     "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim" },
+    dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
     config = function()
+      -- Must be set up after mason and before lspconfig
       require("mason-lspconfig").setup({
         -- Automatically install these LSP servers
         ensure_installed = {
@@ -181,16 +182,15 @@ return {
         yamlls = {},
       }
 
-      -- Setup LSP servers via mason-lspconfig handlers (avoids deprecated lspconfig API)
-      require("mason-lspconfig").setup_handlers({
-        -- Default handler for all servers
-        function(server_name)
-          local config = servers[server_name] or {}
-          config.on_attach = on_attach
-          config.capabilities = capabilities
-          require("lspconfig")[server_name].setup(config)
-        end,
-      })
+      -- Get lspconfig
+      local lspconfig = require("lspconfig")
+
+      -- Setup LSP servers
+      for server, config in pairs(servers) do
+        config.on_attach = on_attach
+        config.capabilities = capabilities
+        lspconfig[server].setup(config)
+      end
     end,
   },
 
