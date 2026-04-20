@@ -184,15 +184,13 @@ return {
     config = function()
       local wk = require("which-key")
       wk.setup({
+        preset = "classic",
+        delay = 300,
         plugins = {
           marks = true,
           registers = true,
-          spelling = {
-            enabled = false,
-          },
+          spelling = { enabled = false },
           presets = {
-            operators = true,
-            motions = true,
             text_objects = true,
             windows = true,
             nav = true,
@@ -200,11 +198,9 @@ return {
             g = true,
           },
         },
-        window = {
+        win = {
           border = "rounded",
-          position = "bottom",
-          margin = { 1, 0, 1, 0 },
-          padding = { 2, 2, 2, 2 },
+          padding = { 1, 2 },
         },
         layout = {
           height = { min = 4, max = 25 },
@@ -213,20 +209,18 @@ return {
           align = "left",
         },
         show_help = true,
-        triggers = "auto",
-        timeout = 300,  -- 300ms delay before popup
       })
 
-      -- Register leader key groups
-      wk.register({
-        ["<leader>f"] = { name = "Find" },
-        ["<leader>g"] = { name = "Grep" },
-        ["<leader>b"] = { name = "Buffers" },
-        ["<leader>l"] = { name = "LSP" },
-        ["<leader>d"] = { name = "Debug" },
-        ["<leader>w"] = { name = "Windows" },
-        ["<leader>x"] = { name = "Trouble" },
-        ["<leader>s"] = { name = "Search" },
+      -- Register leader key groups (v3 API)
+      wk.add({
+        { "<leader>f", group = "Find" },
+        { "<leader>g", group = "Grep" },
+        { "<leader>b", group = "Buffers" },
+        { "<leader>l", group = "LSP" },
+        { "<leader>d", group = "Debug" },
+        { "<leader>w", group = "Windows" },
+        { "<leader>x", group = "Trouble" },
+        { "<leader>s", group = "Search" },
       })
     end,
   },
