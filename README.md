@@ -70,7 +70,7 @@ mv ~/.config/nvim ~/.config/nvim.backup
 mv ~/.local/share/nvim ~/.local/share/nvim.backup
 
 # Clone OhMyNvim
-git clone https://github.com/yourusername/ohmynvim.git ~/.config/nvim
+git clone https://github.com/4thel00z/ohmynvim.git ~/.config/nvim
 
 # Start Neovim
 nvim
