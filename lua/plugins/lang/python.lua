@@ -13,33 +13,17 @@ return {
     ft = "python",
     config = function()
       require("venv-selector").setup({
-        -- Auto select venv when opening Python files
-        auto_refresh = true,
-        search_venv_managers = true,
-        search = true,
-        dap_enabled = true,
-        -- Search for venvs in common locations
-        search_paths = {
-          ".venv",
-          "venv",
-          "env",
-          ".env",
-          "~/venvs",
-          "~/.virtualenvs",
-          "~/.pyenv/versions",
+        -- New API (main branch, Neovim 0.11+). Defaults cover poetry, pyenv,
+        -- pipenv, pixi, hatch, conda/miniconda, pipx, cwd, workspace, file.
+        options = {
+          enable_default_searches = true,
+          enable_cached_venvs = true,
+          cached_venv_automatic_activation = true,
+          activate_venv_in_terminal = true,
+          set_environment_variables = true,
+          notify_user_on_venv_activation = true,
+          require_lsp_activation = true,
         },
-        -- Anaconda/conda support
-        anaconda_base_path = vim.fn.expand("~/anaconda3"),
-        anaconda_envs_path = vim.fn.expand("~/anaconda3/envs"),
-        -- UI settings
-        name = {
-          "venv",
-          ".venv",
-          "env",
-          ".env",
-        },
-        parents = 0,
-        notify_user_on_activate = true,
       })
 
       -- Keybinding to select venv

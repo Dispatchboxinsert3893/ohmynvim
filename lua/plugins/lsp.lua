@@ -182,15 +182,22 @@ return {
         yamlls = {},
       }
 
-      -- Get lspconfig
-      local lspconfig = require("lspconfig")
-
-      -- Setup LSP servers
+      -- Setup LSP servers using the new vim.lsp.config API (Neovim 0.11+)
       for server, config in pairs(servers) do
-        config.on_attach = on_attach
         config.capabilities = capabilities
-        lspconfig[server].setup(config)
+        vim.lsp.config(server, config)
+        vim.lsp.enable(server)
       end
+
+      -- Attach keybindings when an LSP client attaches to a buffer
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local bufnr = args.buf
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          on_attach(client, bufnr)
+        end,
+        desc = "LSP on_attach keybindings",
+      })
     end,
   },
 
