@@ -55,7 +55,6 @@ return {
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
-      local lspconfig = require("lspconfig")
       local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
       -- LSP keybindings (set when LSP attaches)
@@ -182,12 +181,16 @@ return {
         yamlls = {},
       }
 
-      -- Setup LSP servers
-      for server, config in pairs(servers) do
-        config.on_attach = on_attach
-        config.capabilities = capabilities
-        lspconfig[server].setup(config)
-      end
+      -- Setup LSP servers via mason-lspconfig handlers (avoids deprecated lspconfig API)
+      require("mason-lspconfig").setup_handlers({
+        -- Default handler for all servers
+        function(server_name)
+          local config = servers[server_name] or {}
+          config.on_attach = on_attach
+          config.capabilities = capabilities
+          require("lspconfig")[server_name].setup(config)
+        end,
+      })
     end,
   },
 
