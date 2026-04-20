@@ -1,0 +1,20 @@
+# Lazy.nvim lock file (comment out if you want to version control it)
+lazy-lock.json
+
+# Plugin directory
+plugin/
+
+# Spell files
+spell/
+
+# Log files
+*.log
+
+# Undo files
+*.un~
+
+# Session files
+*.vim
+
+# Neovim state
+.netrwhist
