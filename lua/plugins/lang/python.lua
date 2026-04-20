@@ -10,7 +10,12 @@ return {
       "nvim-telescope/telescope.nvim",
       "mfussenegger/nvim-dap-python",
     },
-    ft = "python",
+    event = { "BufReadPre *.py", "BufNewFile *.py" },
+    cmd = { "VenvSelect", "VenvSelectCached" },
+    keys = {
+      { "<leader>vs", "<cmd>VenvSelect<cr>", desc = "Select Python venv" },
+      { "<leader>vc", "<cmd>VenvSelectCached<cr>", desc = "Select cached venv" },
+    },
     config = function()
       require("venv-selector").setup({
         -- New API (main branch, Neovim 0.11+). Defaults cover poetry, pyenv,
@@ -25,10 +30,6 @@ return {
           require_lsp_activation = true,
         },
       })
-
-      -- Keybinding to select venv
-      vim.keymap.set("n", "<leader>vs", "<cmd>VenvSelect<cr>", { desc = "Select Python venv" })
-      vim.keymap.set("n", "<leader>vc", "<cmd>VenvSelectCached<cr>", { desc = "Select cached venv" })
     end,
   },
 
