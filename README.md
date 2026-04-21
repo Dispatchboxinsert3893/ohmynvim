@@ -60,6 +60,7 @@ Before installing OhMyNvim, ensure you have:
   - [fd](https://github.com/sharkdp/fd) - for faster file finding
   - Node.js - for TypeScript/JavaScript LSP
   - Python 3 - for Python LSP
+  - `pynvim` + `jupyter_client` - for molten-nvim code execution (`pip install pynvim jupyter_client`)
   - Bun - for Node.js package management
 
 ### Quick Install
@@ -120,8 +121,9 @@ LSP servers will also auto-install when you open files of supported types.
 | `<leader>fg` | 🔎 Live grep (search in files) |
 | `<leader>fb` | 📋 List buffers |
 | `<leader>fr` | 🕐 Recent files |
-| `<leader>e` | 📂 Toggle file tree |
-| `<leader>fe` | 📍 Find current file in tree |
+| `<leader>ee` | 📂 Toggle file tree |
+| `<leader>ef` | 🎯 Focus file tree |
+| `<leader>ei` | 📍 Find current file in tree |
 
 ### 💡 LSP (Code Intelligence)
 
@@ -271,6 +273,27 @@ First time you press `<leader>oa`, OhMyNvim will offer to scaffold three starter
 | `<leader>oi` | 📬 Inbox file |
 | `<leader>os` | 🌱 `:OrgScaffold` (idempotent init) |
 
+### Code Execution (molten-nvim)
+
+OhMyNvim includes [`molten-nvim`](https://github.com/benlubas/molten-nvim) for running
+code blocks inside `.org` files (and any other buffer) via Jupyter kernels.
+
+**Prerequisite:** `pip install pynvim jupyter_client`
+
+| Key | Action |
+|-----|--------|
+| `<leader>ok` | 🔌 Kernel init |
+| `<leader>oK` | ⏏️ Kernel deinit |
+| `<leader>ox` | ▶️ Execute org source block |
+| `<leader>oX` | ▶️ Execute visual selection |
+| `<leader>ol` | ▶️ Execute line |
+| `<leader>oh` | 🙈 Hide output |
+| `<leader>on` | ⏭️ Next cell |
+| `<leader>op` | ⏮️ Prev cell |
+| `<leader>od` | 🗑️ Delete cell |
+
+Disable with `vim.g.ohmynvim_notebook_enabled = false`.
+
 ### Configuration
 
 ```lua
@@ -310,6 +333,8 @@ vim.g.ohmynvim_org_enabled = true  -- escape hatch to disable entire module
 - [which-key.nvim](https://github.com/folke/which-key.nvim) - Keybinding hints
 - [todo-comments.nvim](https://github.com/folke/todo-comments.nvim) - Highlight TODOs
 - [auto-session](https://github.com/rmagatti/auto-session) - Session management
+- [molten-nvim](https://github.com/benlubas/molten-nvim) - Jupyter code execution
+- [image.nvim](https://github.com/3rd/image.nvim) - Inline image rendering (kitty/WezTerm)
 
 </details>
 
@@ -392,6 +417,8 @@ ensure_installed = {
 │       ├── completion.lua   # Completion engine
 │       ├── navigation.lua   # Navigation tools
 │       ├── debug.lua        # Debug adapters
+│       ├── orgmode.lua      # Orgmode integration
+│       ├── notebook.lua     # Jupyter code execution (molten-nvim)
 │       └── lang/            # Language-specific
 │           ├── rust.lua
 │           ├── go.lua
