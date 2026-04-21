@@ -137,6 +137,7 @@ return {
         dashboard.button("n", "  New file", "<cmd>ene <BAR> startinsert<CR>"),
         dashboard.button("r", "  Recent files", "<cmd>Telescope oldfiles<CR>"),
         dashboard.button("g", "  Find text", "<cmd>Telescope live_grep<CR>"),
+        dashboard.button("o", "  Agenda", "<cmd>Org agenda<CR>"),
         dashboard.button("c", "  Config", "<cmd>e ~/.config/nvim/init.lua<CR>"),
         dashboard.button("l", "󰒲  Lazy", "<cmd>Lazy<CR>"),
         dashboard.button("m", "  Mason", "<cmd>Mason<CR>"),
