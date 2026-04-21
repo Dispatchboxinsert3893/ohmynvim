@@ -46,6 +46,44 @@ local function find_org_src_block()
   return body_start, body_end
 end
 
+local src_languages = {
+  "python", "lua", "bash", "sh", "ruby", "perl",
+  "javascript", "typescript", "go", "rust", "c", "cpp",
+  "java", "R", "julia", "sql", "elisp", "haskell",
+}
+
+--- Insert an org source block below the current line.
+--- @param lang string
+--- @param header_args string|nil  e.g. ":results output :var x=5"
+local function insert_org_src_block(lang, header_args)
+  local begin_line = "#+BEGIN_SRC " .. lang
+  if header_args and header_args ~= "" then
+    begin_line = begin_line .. " " .. header_args
+  end
+  local row = vim.api.nvim_win_get_cursor(0)[1]
+  vim.api.nvim_buf_set_lines(0, row, row, false, { begin_line, "", "#+END_SRC" })
+  vim.api.nvim_win_set_cursor(0, { row + 2, 0 }) -- empty body line
+  vim.cmd("startinsert")
+end
+
+--- Prompt for language, then insert a plain src block.
+local function prompt_and_insert_src_block()
+  vim.ui.select(src_languages, { prompt = "Source block language:" }, function(lang)
+    if not lang then return end
+    insert_org_src_block(lang)
+  end)
+end
+
+--- Prompt for language and header args, then insert a parametrised src block.
+local function prompt_and_insert_parametrized_block()
+  vim.ui.select(src_languages, { prompt = "Source block language:" }, function(lang)
+    if not lang then return end
+    vim.ui.input({ prompt = "Header args: " }, function(args)
+      insert_org_src_block(lang, args)
+    end)
+  end)
+end
+
 --- Visually select the org src block body and execute via MoltenEvaluateVisual.
 local function execute_org_src_block()
   local body_start, body_end = find_org_src_block()
@@ -83,6 +121,8 @@ return {
       { "<leader>on", "<cmd>MoltenNext<CR>", desc = "Next cell" },
       { "<leader>op", "<cmd>MoltenPrev<CR>", desc = "Prev cell" },
       { "<leader>od", "<cmd>MoltenDelete<CR>", desc = "Delete cell" },
+      { "<leader>ob", prompt_and_insert_src_block, ft = "org", desc = "Insert src block" },
+      { "<leader>oB", prompt_and_insert_parametrized_block, ft = "org", desc = "Insert src block (with args)" },
     },
   },
 

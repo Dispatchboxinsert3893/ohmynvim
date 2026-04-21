@@ -244,6 +244,8 @@ return {
         { "<leader>on", desc = "Next cell" },
         { "<leader>op", desc = "Prev cell" },
         { "<leader>od", desc = "Delete cell" },
+        { "<leader>ob", desc = "Insert src block" },
+        { "<leader>oB", desc = "Insert src block (args)" },
       })
     end,
   },
