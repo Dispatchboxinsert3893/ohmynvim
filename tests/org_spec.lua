@@ -47,4 +47,58 @@ describe("core.org", function()
       assert.are.equal(vim.fn.expand("~/custom-org"), org.resolve_dir())
     end)
   end)
+
+  describe("scaffold", function()
+    local tmpdir
+
+    before_each(function()
+      tmpdir = vim.fn.tempname()
+      vim.g.ohmynvim_org_dir = tmpdir
+    end)
+
+    after_each(function()
+      if tmpdir and vim.fn.isdirectory(tmpdir) == 1 then
+        vim.fn.delete(tmpdir, "rf")
+      end
+    end)
+
+    it("creates the directory when missing", function()
+      assert.are.equal(0, vim.fn.isdirectory(tmpdir))
+      local result = org.scaffold()
+      assert.is_true(result.created_dir)
+      assert.are.equal(1, vim.fn.isdirectory(tmpdir))
+    end)
+
+    it("seeds inbox.org, todo.org, and journal.org", function()
+      local result = org.scaffold()
+      table.sort(result.created_files)
+      assert.are.same({ "inbox.org", "journal.org", "todo.org" }, result.created_files)
+      assert.are.equal(1, vim.fn.filereadable(tmpdir .. "/inbox.org"))
+      assert.are.equal(1, vim.fn.filereadable(tmpdir .. "/todo.org"))
+      assert.are.equal(1, vim.fn.filereadable(tmpdir .. "/journal.org"))
+    end)
+
+    it("is idempotent — second call creates nothing", function()
+      org.scaffold()
+      local result = org.scaffold()
+      assert.is_false(result.created_dir)
+      assert.are.same({}, result.created_files)
+    end)
+
+    it("never overwrites pre-existing files", function()
+      vim.fn.mkdir(tmpdir, "p")
+      local path = tmpdir .. "/inbox.org"
+      vim.fn.writefile({ "custom content" }, path)
+      org.scaffold()
+      local content = table.concat(vim.fn.readfile(path), "\n")
+      assert.are.equal("custom content", content)
+    end)
+
+    it("writes the expected header to a fresh inbox.org", function()
+      org.scaffold()
+      local lines = vim.fn.readfile(tmpdir .. "/inbox.org")
+      assert.are.equal("#+TITLE: Inbox", lines[1])
+      assert.are.equal("#+STARTUP: overview", lines[2])
+    end)
+  end)
 end)
