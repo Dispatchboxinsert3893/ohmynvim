@@ -147,9 +147,9 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeFindFile" },
     keys = {
-      { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Toggle file tree" },
-      { "<leader>o", "<cmd>NvimTreeFocus<cr>", desc = "Focus file tree" },
-      { "<leader>fe", "<cmd>NvimTreeFindFile<cr>", desc = "Find file in tree" },
+      { "<leader>ee", "<cmd>NvimTreeToggle<cr>", desc = "Toggle file tree" },
+      { "<leader>ef", "<cmd>NvimTreeFocus<cr>", desc = "Focus file tree" },
+      { "<leader>ei", "<cmd>NvimTreeFindFile<cr>", desc = "Find file in tree" },
     },
     config = function()
       -- Disable netrw (recommended by nvim-tree)
