@@ -236,6 +236,55 @@ LSP servers will also auto-install when you open files of supported types.
 
 ---
 
+## 📝 Orgmode
+
+OhMyNvim ships with [`nvim-orgmode`](https://github.com/nvim-orgmode/orgmode) pre-configured:
+agenda, capture, TODOs, and journaling live under `<leader>o*`.
+
+### Setup
+
+By default, `~/org/` is used. Override with either:
+
+```bash
+export OHMYNVIM_ORG_DIR=~/Documents/org
+```
+
+or in your `init.lua` before plugins load:
+
+```lua
+vim.g.ohmynvim_org_dir = "~/Documents/org"
+```
+
+First time you press `<leader>oa`, OhMyNvim will offer to scaffold three starter files:
+`inbox.org`, `todo.org`, `journal.org`.
+
+### Keybindings
+
+| Key | Action |
+|-----|--------|
+| `<leader>oa` | 📅 Agenda |
+| `<leader>oc` | 📥 Capture |
+| `<leader>of` | 🔍 Find headline (telescope) |
+| `<leader>or` | 📦 Refile target (telescope) |
+| `<leader>oj` | 📓 Journal (today's entry) |
+| `<leader>ot` | ✅ Todo file |
+| `<leader>oi` | 📬 Inbox file |
+| `<leader>os` | 🌱 `:OrgScaffold` (idempotent init) |
+
+### Configuration
+
+```lua
+-- All optional; set before plugins load
+vim.g.ohmynvim_org_dir = "~/org"
+vim.g.ohmynvim_org_agenda_files = nil  -- nil = glob org_dir/**/*.org
+vim.g.ohmynvim_org_todo_keywords = { "TODO(t)", "NEXT(n)", "WAITING(w)", "|", "DONE(d)", "CANCELLED(c)" }
+vim.g.ohmynvim_org_capture_templates = nil  -- nil = use defaults
+vim.g.ohmynvim_org_bullets = { "◉", "○", "✸", "✿" }
+vim.g.ohmynvim_org_enabled = true  -- escape hatch to disable entire module
+```
+
+---
+
 ## 📦 Included Plugins
 
 <details>
