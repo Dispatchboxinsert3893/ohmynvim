@@ -39,6 +39,7 @@ return {
           "markdown",
           "markdown_inline",
           "bash",
+          "org",
         },
         auto_install = true,  -- Auto-install missing parsers
         highlight = {
@@ -221,6 +222,15 @@ return {
         { "<leader>w", group = "Windows" },
         { "<leader>x", group = "Trouble" },
         { "<leader>s", group = "Search" },
+        { "<leader>o", group = "📝 Org" },
+        { "<leader>oa", desc = "Agenda" },
+        { "<leader>oc", desc = "Capture" },
+        { "<leader>of", desc = "Find headline" },
+        { "<leader>or", desc = "Refile target" },
+        { "<leader>oj", desc = "Journal (today)" },
+        { "<leader>ot", desc = "Todo file" },
+        { "<leader>oi", desc = "Inbox file" },
+        { "<leader>os", desc = "Scaffold org dir" },
       })
     end,
   },
