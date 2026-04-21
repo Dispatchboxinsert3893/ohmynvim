@@ -101,4 +101,47 @@ describe("core.org", function()
       assert.are.equal("#+STARTUP: overview", lines[2])
     end)
   end)
+
+  describe("ensure_scaffolded", function()
+    local tmpdir
+
+    before_each(function()
+      tmpdir = vim.fn.tempname()
+      vim.g.ohmynvim_org_dir = tmpdir
+    end)
+
+    after_each(function()
+      if tmpdir and vim.fn.isdirectory(tmpdir) == 1 then
+        vim.fn.delete(tmpdir, "rf")
+      end
+      -- Restore default prompt
+      package.loaded["core.org"] = nil
+    end)
+
+    it("returns true without prompting when dir has .org files", function()
+      org.scaffold()
+      local prompted = false
+      org._prompt = function(_cb) prompted = true end
+      assert.is_true(org.ensure_scaffolded())
+      assert.is_false(prompted)
+    end)
+
+    it("prompts and scaffolds when user answers Yes on empty dir", function()
+      org._prompt = function(cb) cb("Yes") end
+      assert.is_true(org.ensure_scaffolded())
+      assert.are.equal(1, vim.fn.filereadable(tmpdir .. "/inbox.org"))
+    end)
+
+    it("prompts and does nothing when user answers No on empty dir", function()
+      org._prompt = function(cb) cb("No") end
+      assert.is_false(org.ensure_scaffolded())
+      assert.are.equal(0, vim.fn.filereadable(tmpdir .. "/inbox.org"))
+    end)
+
+    it("prompts and does nothing when user dismisses the prompt", function()
+      org._prompt = function(cb) cb(nil) end
+      assert.is_false(org.ensure_scaffolded())
+      assert.are.equal(0, vim.fn.filereadable(tmpdir .. "/inbox.org"))
+    end)
+  end)
 end)

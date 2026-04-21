@@ -68,4 +68,38 @@ function M.scaffold()
   return { dir = dir, created_dir = created_dir, created_files = created_files }
 end
 
+---Default prompt implementation. Tests can override `M._prompt` to stub.
+---@param cb fun(choice: string|nil)
+function M._prompt(cb)
+  vim.ui.select({ "Yes", "No" }, {
+    prompt = "Org directory is empty. Scaffold inbox/todo/journal now?",
+  }, cb)
+end
+
+---Check whether the org directory exists and contains at least one .org file.
+---If empty or missing, prompt the user to scaffold.
+---@return boolean satisfied  true if the dir is populated (either already or after scaffolding)
+function M.ensure_scaffolded()
+  local dir = M.resolve_dir()
+  local has_org = false
+  if vim.fn.isdirectory(dir) == 1 then
+    local matches = vim.fn.globpath(dir, "*.org", false, true)
+    has_org = #matches > 0
+  end
+  if has_org then
+    return true
+  end
+
+  local answered
+  M._prompt(function(choice)
+    answered = choice
+  end)
+
+  if answered == "Yes" then
+    M.scaffold()
+    return true
+  end
+  return false
+end
+
 return M
