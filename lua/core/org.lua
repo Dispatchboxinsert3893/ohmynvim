@@ -102,4 +102,30 @@ function M.ensure_scaffolded()
   return false
 end
 
+---Register :OrgScaffold and :OrgDir user commands.
+---Called by lua/plugins/orgmode.lua during plugin setup.
+function M.setup()
+  vim.api.nvim_create_user_command("OrgScaffold", function()
+    local result = M.scaffold()
+    local msg
+    if result.created_dir or #result.created_files > 0 then
+      local parts = {}
+      if result.created_dir then
+        table.insert(parts, "created dir " .. result.dir)
+      end
+      if #result.created_files > 0 then
+        table.insert(parts, "seeded " .. table.concat(result.created_files, ", "))
+      end
+      msg = "OrgScaffold: " .. table.concat(parts, "; ")
+    else
+      msg = "OrgScaffold: nothing to do (dir already populated at " .. result.dir .. ")"
+    end
+    vim.notify(msg, vim.log.levels.INFO)
+  end, { desc = "Scaffold the org directory with inbox/todo/journal" })
+
+  vim.api.nvim_create_user_command("OrgDir", function()
+    vim.notify(M.resolve_dir(), vim.log.levels.INFO)
+  end, { desc = "Echo the resolved org directory" })
+end
+
 return M

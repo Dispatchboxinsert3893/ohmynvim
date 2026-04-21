@@ -144,4 +144,37 @@ describe("core.org", function()
       assert.are.equal(0, vim.fn.filereadable(tmpdir .. "/inbox.org"))
     end)
   end)
+
+  describe("setup", function()
+    local tmpdir
+
+    before_each(function()
+      tmpdir = vim.fn.tempname()
+      vim.g.ohmynvim_org_dir = tmpdir
+      -- Clear any prior registration
+      pcall(vim.api.nvim_del_user_command, "OrgScaffold")
+      pcall(vim.api.nvim_del_user_command, "OrgDir")
+    end)
+
+    after_each(function()
+      if tmpdir and vim.fn.isdirectory(tmpdir) == 1 then
+        vim.fn.delete(tmpdir, "rf")
+      end
+      pcall(vim.api.nvim_del_user_command, "OrgScaffold")
+      pcall(vim.api.nvim_del_user_command, "OrgDir")
+    end)
+
+    it("registers :OrgScaffold and :OrgDir user commands", function()
+      org.setup()
+      local cmds = vim.api.nvim_get_commands({})
+      assert.is_not_nil(cmds.OrgScaffold)
+      assert.is_not_nil(cmds.OrgDir)
+    end)
+
+    it(":OrgScaffold creates seed files", function()
+      org.setup()
+      vim.cmd("OrgScaffold")
+      assert.are.equal(1, vim.fn.filereadable(tmpdir .. "/inbox.org"))
+    end)
+  end)
 end)
