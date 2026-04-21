@@ -25,6 +25,7 @@ require("lazy").setup({
   { import = "plugins.navigation" },
   { import = "plugins.debug" },
   { import = "plugins.orgmode" },
+  { import = "plugins.notebook" },
   { import = "plugins.lang.rust" },
   { import = "plugins.lang.go" },
   { import = "plugins.lang.python" },
