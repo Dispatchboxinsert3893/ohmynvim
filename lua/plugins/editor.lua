@@ -6,7 +6,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    event = "BufReadPost",
+    event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
@@ -214,6 +214,10 @@ return {
 
       -- Register leader key groups (v3 API)
       wk.add({
+        { "<leader>e", group = "Explorer" },
+        { "<leader>ee", desc = "Toggle file tree" },
+        { "<leader>ef", desc = "Focus file tree" },
+        { "<leader>ei", desc = "Find file in tree" },
         { "<leader>f", group = "Find" },
         { "<leader>g", group = "Grep" },
         { "<leader>b", group = "Buffers" },
@@ -231,6 +235,15 @@ return {
         { "<leader>ot", desc = "Todo file" },
         { "<leader>oi", desc = "Inbox file" },
         { "<leader>os", desc = "Scaffold org dir" },
+        { "<leader>ok", desc = "Kernel init" },
+        { "<leader>oK", desc = "Kernel deinit" },
+        { "<leader>ox", desc = "Execute org src block" },
+        { "<leader>oX", desc = "Execute selection" },
+        { "<leader>ol", desc = "Execute line" },
+        { "<leader>oh", desc = "Hide output" },
+        { "<leader>on", desc = "Next cell" },
+        { "<leader>op", desc = "Prev cell" },
+        { "<leader>od", desc = "Delete cell" },
       })
     end,
   },
