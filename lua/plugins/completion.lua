@@ -117,6 +117,21 @@ return {
           { name = "cmdline" },
         }),
       })
+
+      -- Org-mode buffer-local completion sources
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "org",
+        callback = function()
+          cmp.setup.buffer({
+            sources = cmp.config.sources({
+              { name = "orgmode", priority = 1000 },
+              { name = "luasnip", priority = 750 },
+              { name = "buffer", priority = 500 },
+              { name = "path", priority = 250 },
+            }),
+          })
+        end,
+      })
     end,
   },
 
