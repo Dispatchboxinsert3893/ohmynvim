@@ -54,6 +54,64 @@ keymap("x", "<leader>p", '"_dP', { desc = "Paste without yanking" })
 keymap("n", "<leader>d", '"_d', { desc = "Delete without yanking" })
 keymap("v", "<leader>d", '"_d', { desc = "Delete without yanking" })
 
+-- Run group (<leader>r)
+-- Softwrap toggle
+keymap("n", "<leader>rw", function()
+  vim.wo.wrap = not vim.wo.wrap
+  vim.wo.linebreak = vim.wo.wrap
+  vim.wo.breakindent = vim.wo.wrap
+  vim.notify("Softwrap " .. (vim.wo.wrap and "ON" or "OFF"))
+end, { desc = "Toggle softwrap" })
+
+-- Run current file
+keymap("n", "<leader>rc", function()
+  local file = vim.api.nvim_buf_get_name(0)
+  if file == "" then
+    vim.notify("No file", vim.log.levels.WARN)
+    return
+  end
+  local runners = {
+    python = function()
+      local ok, venv = pcall(require, "venv-selector")
+      local python = ok and venv.python() or "python3"
+      if not python or python == "" then python = "python3" end
+      return python .. " " .. file:gsub('"', '\\"')
+    end,
+    lua = function() return "lua " .. file:gsub('"', '\\"') end,
+    javascript = function() return "node " .. file:gsub('"', '\\"') end,
+    typescript = function() return "npx tsx " .. file:gsub('"', '\\"') end,
+    sh = function() return "bash " .. file:gsub('"', '\\"') end,
+    bash = function() return "bash " .. file:gsub('"', '\\"') end,
+    zsh = function() return "zsh " .. file:gsub('"', '\\"') end,
+    go = function() return "go run " .. file:gsub('"', '\\"') end,
+    rust = function() return "cargo run" end,
+  }
+  local ft = vim.bo.filetype
+  local runner = runners[ft]
+  if not runner then
+    vim.notify("No runner for filetype: " .. ft, vim.log.levels.WARN)
+    return
+  end
+  vim.cmd('TermExec cmd="' .. runner() .. '"')
+end, { desc = "Run current file" })
+
+-- Arbitrary shell command (uses toggleterm's TermExec)
+keymap("n", "<leader>re", function()
+  vim.ui.input({ prompt = "Shell command: " }, function(cmd)
+    if not cmd or cmd == "" then return end
+    vim.cmd('TermExec cmd="' .. cmd:gsub('"', '\\"') .. '"')
+  end)
+end, { desc = "Run shell command" })
+
+-- Bang command runner (`:!<subcmd>`, output in cmdline)
+keymap("n", "<leader>rr", function()
+  vim.ui.input({ prompt = ":! " }, function(cmd)
+    if not cmd or cmd == "" then return end
+    vim.cmd("! " .. cmd)
+  end)
+end, { desc = "Run :! command" })
+
+
 -- Plugin-specific keymaps are defined in their plugin specs:
 -- - Telescope: <leader>f, <leader>g, <leader>b, <leader>s*
 -- - nvim-tree: <leader>e
@@ -62,3 +120,4 @@ keymap("v", "<leader>d", '"_d', { desc = "Delete without yanking" })
 -- - Debug: <leader>d*
 -- - Trouble: <leader>x*
 -- - Glow: <leader>mp
+-- - Run: <leader>r*

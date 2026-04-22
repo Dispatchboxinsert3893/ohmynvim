@@ -246,6 +246,11 @@ return {
         { "<leader>od", desc = "Delete cell" },
         { "<leader>ob", desc = "Insert src block" },
         { "<leader>oB", desc = "Insert src block (args)" },
+        { "<leader>r", group = "Run" },
+        { "<leader>rw", desc = "Toggle softwrap" },
+        { "<leader>rc", desc = "Run current file" },
+        { "<leader>re", desc = "Run shell command" },
+        { "<leader>rr", desc = "Run :! command" },
       })
     end,
   },
